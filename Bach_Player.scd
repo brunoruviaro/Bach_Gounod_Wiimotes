@@ -6,7 +6,7 @@
 ///////////////////////////////////////
 
 // Open Wiimote file and go through it to set up wiimote:
-("".resolveRelative ++ "Bach_Wiimote.scd").openDocument;
+("".resolveRelative ++ "Bach_Wiimote_Setup.scd").openDocument;
 
 // Load score:
 "Bach_Score.scd".loadRelative;
@@ -18,7 +18,7 @@
 // Load synths:
 "Bach_SynthDefs.scd".loadRelative;
 
-// If you are a SINGER, load these functions:
+// Last one to run:
 "Bach_Functions.scd".loadRelative;
 
 
