@@ -4,11 +4,12 @@
 
 // numbers refer to MEASURES
 
-~transp = -2;
-// This ~transp is used in the Synth calls inside Functions file. I just put it here because it makes sense to be part of the Score file. Use it to change key. 0 means original C major from Bach. 1 means C# major, -2 is Bb major, etc.
+~transp = 5;
+// This ~transp is used in the Synth calls inside Functions file. I just put it here because it makes sense to be part of the Score file. Use it to change key. 0 means original C major from Bach. 1 means C# major, -2 is Bb major, 5 is F major, etc.
 
 ~sopranoScore = [ [],
-	/*1*/	[ [76] ],
+/*INTRO*/ [ [76], [77], [77], [76] ],
+	/*1*/   [ [76] ],
 	/*2*/	[ [77] ],
 	/*3*/	[ [77] ],
 	/*4*/	[ [76] ],
@@ -44,17 +45,18 @@
 
 	 /*32*/	[ [65] ],
 	 /*33*/	[ [64] ],
-	 /*34*/	[ [65], [65] ],
-	 /*35*/	[ [77], [74] ],
-	 /*36*/	[ [72] ],
+	 /*34*/	[ [65] ],
+	/*35*/	[ [65] ],
+	 /*36*/	[ [64] ],
 	/*end*/ [ [0] ]];
 
 ~altoScore = [ [],
+	/*INTRO*/ [ [72], [74], [74], [72] ],
 	/*1*/	[ [72] ],
 	/*2*/	[ [74] ],
 	/*3*/	[ [74] ],
 	/*4*/	[ [72] ],
-	/*5*/	[ [74] ],
+	/*5*/	[ [76] ],
 	/*6*/	[ [69] ],
 	/*7*/	[ [74] ],
 	/*8*/	[ [67] ],
@@ -86,13 +88,14 @@
 
 	 /*32*/	[ [59] ],
 	 /*33*/	[ [58] ],
-	 /*34*/	[ [57, 60], [57, 60] ],
-	 /*35*/	[ [67, 71, 73], [65, 67, 71] ],
-	 /*36*/	[ [64, 67, 0] ],
-	/*end*/ [ [0] ]];
+	 /*34*/	[ [57, 60] ],
+	 /*35*/	[ [55, 62] ],
+	 /*36*/	[ [55, 60] ],
+	/*end*/ [ [0, 0] ]];
 
 
 ~tenorScore = [ [],
+	/*INTRO*/ [ [67], [69], [67], [67] ],
 	/*1*/	[ [67] ],
 	/*2*/	[ [69] ],
 	/*3*/	[ [67] ],
@@ -129,13 +132,14 @@
 
 	 /*32*/	[ [55] ],
 	 /*33*/	[ [55] ],
-	 /*34*/	[ [53], [53] ],
-	 /*35*/	[ [53], [51] ],
-	 /*36*/	[ [52] ],
+	 /*34*/	[ [53] ],
+	 /*35*/	[ [50] ],
+	 /*36*/	[ [48] ],
 	/*end*/ [ [0] ]];
 
 
 ~baritoneScore = [ [],
+	/*INTRO*/ [ [64], [62], [62], [64] ],
 	/*1*/	[ [64] ],
 	/*2*/	[ [62] ],
 	/*3*/	[ [62] ],
@@ -172,13 +176,14 @@
 
 	 /*32*/	[ [50] ],
 	 /*33*/	[ [48] ],
-	 /*34*/	[ [48], [48, 50] ],
-	 /*35*/	[ [47, 0], [47] ],
+	 /*34*/	[ [48] ],
+	 /*35*/	[ [47] ],
 	 /*36*/	[ [48] ],
 	/*end*/ [ [0] ]];
 
 
 ~bassScore = [ [],
+	/*INTRO*/ [ [60], [60], [59], [60] ],
 	/*1*/	[ [60] ],
 	/*2*/	[ [60] ],
 	/*3*/	[ [59] ],
@@ -215,12 +220,12 @@
 
 	 /*32*/	[ [43] ],
 	 /*33*/	[ [36] ],
-	 /*34*/	[ [36], [36] ],
-	 /*35*/	[ [36], [36] ],
+	 /*34*/	[ [36] ],
+	 /*35*/	[ [36] ],
 	 /*36*/	[ [36] ],
 	/*end*/ [ [0] ]];
 
-// Assuming all parts have equal size of measures:
+// Assuming all parts have equal number of measures:
 ~numberOfMeasures = ~sopranoScore.size - 2;
 
 

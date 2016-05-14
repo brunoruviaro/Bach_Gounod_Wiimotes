@@ -6,7 +6,7 @@
 // Miscellaneous stuff:
 
 ~startAtMeasure = 1;
-~synth = "sine5b";
+~synth = "sine4";
 
 
 // This takes care of all score stuff;
@@ -15,11 +15,11 @@ r = Routine({arg inbar;
 
 	var flatScore, startingPoint;
 
-	"Start of Routine".postln;
+	// "Start of Routine".postln;
 
 	// Start fresh synth array (up to 4 divisi in one voice):
 	~divisi = Array.newClear(4);
-	"Synth array cleared".postln;
+	// "Synth array cleared".postln;
 
 	s.freeAll;
 
@@ -34,7 +34,7 @@ r = Routine({arg inbar;
 
 
 	("Ready to start from bar " ++ inbar ++ "...").postln;
-	("Note to be played: " ++ startingPoint).postln;
+	// ("Note to be played: " ++ startingPoint).postln;
 	"Press button A to start".postln;
 
 	"Waiting".yield;
@@ -46,6 +46,9 @@ r = Routine({arg inbar;
 	startingPoint.do({arg note, index; if(note!=0, {~divisi[index] = Synth(~synth, [\midinote, note.abs + ~transp])}) });
 
 	("JUST STARTED PLAYING: Measure " ++ inbar).postln;
+
+	// GUI update
+	// { a.string = inbar.asString; }.defer;
 
 	// Make a copy of the score WITHOUT barlines (that is, flatten the array by one level).
 	// Also drop first element which was just played above (startingPoint).
@@ -74,6 +77,10 @@ r = Routine({arg inbar;
 			// Inside this "step" (an Array), index is divisi voice number; item is midinote.
 			// "Do" the array to start and stop notes accordingly.
 			flatScore.at(i).do({arg note, divisiVoice; ~moveOn.value(divisiVoice, note)});
+
+			// inbar = inbar + 1;
+			// GUI update
+			// { a.string = inbar.asString; }.defer;
 
 			// Wait for next cue to continue iteration over flatScore array:
 			"waiting again...".yield});

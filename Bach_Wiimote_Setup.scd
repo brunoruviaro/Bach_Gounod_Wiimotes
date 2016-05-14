@@ -14,7 +14,7 @@ WiiMote.discover; // wait for post about connected
 // Run this to finalize settings
 ~finalizeWii.value;
 
-// GO BACK TO MAIN FILE TO CONTINUE SETUP
+// CLOSE THIS FILE, GO BACK TO MAIN FILE TO CONTINUE
 
 
 

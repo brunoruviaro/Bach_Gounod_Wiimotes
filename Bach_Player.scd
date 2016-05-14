@@ -18,8 +18,11 @@
 // Load synths:
 "Bach_SynthDefs.scd".loadRelative;
 
-// Last one to run:
+// Load functions:
 "Bach_Functions.scd".loadRelative;
+
+// Open GUI:
+"Bach_GUI.scd".loadRelative;
 
 
 

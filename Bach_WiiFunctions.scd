@@ -59,35 +59,73 @@
 			r.reset; // reset routine
 			// ~startAtMeasure = 1; // start "da capo"
 			r.next(~startAtMeasure); // start here
-			//if(p.notNil, {p.stop; p = nil}); // stop Pbind bell (if there is one running)
+			// GUI shows starting measure number in RED:
+			{
+				a.string = ~startAtMeasure;
+				a.stringColor = Color.red;
+			}.defer;
+			~count = ~startAtMeasure; // this variable to be used to update GUI upon presses of "A" button.
+
 		})
 	});
 
 	// "A" button: next move
-	~wii.setAction(\bA, { arg v; if(v==1, {r.next})});
+	~wii.setAction(\bA, { arg v;
+		if(v==1,
+			{
+				r.next;
+				{
+					a.stringColor = Color.black;
+					a.string = ~count;
+					~count = ~count + 1;
+				}.defer;
+			}
+	)});
 
 	// "Plus" and "Minus" buttons: choose measure number to start from.
 	// Note: variable ~numberOfMeasures determined at end of score file.
 	~wii.setAction(\bPlus, { arg v; if(v==1, {
 		(~startAtMeasure = min(~startAtMeasure + 1, ~numberOfMeasures)).postln;
+		{
+			a.stringColor = Color.green;
+			a.string = ~startAtMeasure;
+		}.defer;
 		// And in case button remains pushed,
 		{
 			1.wait;
 			while(
 				{~wii.at(\bPlus).value==1},
-				{(~startAtMeasure = min(~startAtMeasure + 1, ~numberOfMeasures)).postln; 0.05.wait})
+				{
+					(~startAtMeasure = min(~startAtMeasure + 1, ~numberOfMeasures)).postln;
+					{
+						a.stringColor = Color.green;
+						a.string = ~startAtMeasure;
+					}.defer;
+					0.05.wait;
+				}
+			)
 		}.fork;
 		}
 	)});
 
 	~wii.setAction(\bMinus, { arg v; if(v==1, {
 		(~startAtMeasure = max(~startAtMeasure - 1, 1)).postln;
+		{
+			a.stringColor = Color.green;
+			a.string = ~startAtMeasure;
+		}.defer;
 		// And in case button remains pushed,
 		{
 			1.wait;
 			while(
 				{~wii.at(\bMinus).value==1},
-				{(~startAtMeasure = max(~startAtMeasure - 1, 1)).postln; 0.05.wait})
+				{
+					(~startAtMeasure = max(~startAtMeasure - 1, 1)).postln;
+					{
+						a.stringColor = Color.green;
+						a.string = ~startAtMeasure;
+					}.defer;
+					0.05.wait})
 		}.fork;
 		}
 	)});

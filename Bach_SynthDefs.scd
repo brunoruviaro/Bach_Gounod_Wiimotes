@@ -106,13 +106,13 @@ SynthDef("sine1", {arg midinote = 60, amp = 0.2, gate = 1;
 	Out.ar(0, snd!2);
 }).add;
 
-// this one piles up harmonics (gets thick and brigh and noisy)
+// this one piles up harmonics (gets thick and bright and noisy)
 SynthDef("sine2", {arg midinote = 60, amp = 0.2, gate = 1;
 	var freq, snd, env, arp;
 	freq = {midinote.midicps * LFNoise2.kr(1,0.02,1)}!24;
 	env = EnvGen.kr(Env.asr(0.5, 1, 2.5), gate, doneAction: 2);
 	snd = SinOsc.ar(freq: Lag.kr(freq), mul: amp) * 0.5;
-	arp = Blip.ar(freq: freq, numharm: Line.kr(1, 50, Rand(20, 40)), mul: 0.1);
+	arp = Blip.ar(freq: freq, numharm: SinOsc.kr(3).range(1, 15), mul: 0.1);
 	snd = (snd + arp) * env;
 	Out.ar(0, Splay.ar(snd));
 }).add;
@@ -145,7 +145,7 @@ SynthDef("sine4", {arg midinote = 60, amp = 0.2, gate = 1;
 }).add;
 
 
-// variation using shaper
+// variation using shaper BAD
 SynthDef("sine6", {arg midinote = 60, amp = 0.2, gate = 1;
 	var freq, transFunc, dist, snd1, snd2, mix, env, ffreq;
 	freq = {midinote.midicps * LFNoise1.kr(1,0.04,1)}!24;
@@ -154,7 +154,7 @@ SynthDef("sine6", {arg midinote = 60, amp = 0.2, gate = 1;
 	dist = Lag.kr((In.kr(~wiiXbus)), 1);
 	snd1 = Shaper.ar(transFunc, SinOsc.ar(freq, 0, dist));
 	snd1 = Mix(snd1);
-	Out.ar(0, snd1!2);
+	Out.ar(0, snd1) * 0.1;
 }).add;
 
 // sounds bad
