@@ -8,13 +8,15 @@ a.stringColor = Color.red;
 
 
 b = Button.new(w, Rect(5, 5, 100, 40));
-b.states = [["sine1"], ["sine3"], ["sine4"], ["sine5b"]];
+b.states = [["sine1"], ["sine3"], ["sine4"], ["sine5b"], ["pluck"], ["pluck2"]];
 b.value = 3;
 b.action = { arg bt;
 	case
 	{bt.value==0} {~synth = "sine1"}
 	{bt.value==1} {~synth = "sine3"}
 	{bt.value==2} {~synth = "sine4"}
-	{bt.value==3} {~synth = "sine5b"};
+	{bt.value==3} {~synth = "sine5b"}
+	{bt.value==4} {~synth = "pluck"}
+	{bt.value==5} {~synth = "pluck2"};
 };
 
