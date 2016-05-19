@@ -31,34 +31,36 @@ SynthDef("sine5b", {arg midinote = 60, amp = 0.2, gate = 1, filter = 2000;
 
 SynthDef("pluck", {arg amp = 0.1, freq = 440, decay = 5;
 
-var env, snd;
-env = Env.linen(0, decay, 0).kr(doneAction: 2);
-snd = Pluck.ar(
-        in: WhiteNoise.ar(amp),
-        trig: Impulse.kr(0),
-        maxdelaytime: 0.1,
-        delaytime: freq.reciprocal,
-        decaytime: decay,
+	var env, snd;
+	env = Env.linen(0, decay, 0).kr(doneAction: 2);
+	snd = Pluck.ar(
+		in: WhiteNoise.ar(amp),
+		trig: Impulse.kr(0),
+		maxdelaytime: 0.1,
+		delaytime: freq.reciprocal,
+		decaytime: decay,
 		coef: Lag.kr(In.kr(~wiiXbus), 1).clip(0.1, 0.9);
-    Out.ar(0, [snd, snd]);
+	);
+	Out.ar(0, [snd, snd]);
 }).add;
 
 
 
 SynthDef("pluck2", {arg amp = 0.1, freq = 440, decay = 5, dampen = 0.1;
-var env, snd, klang, snd2;
-env = Env.linen(0.01, 0, decay).kr(doneAction: 2);
-snd = Pluck.ar(
-        in: WhiteNoise.ar(amp),
-        trig: Impulse.kr(0),
-        maxdelaytime: 0.1,
-        delaytime: freq.reciprocal,
-        decaytime: decay,
+	var env, snd, klang, snd2;
+	env = Env.linen(0.01, 0, decay).kr(doneAction: 2);
+	snd = Pluck.ar(
+		in: WhiteNoise.ar(amp),
+		trig: Impulse.kr(0),
+		maxdelaytime: 0.1,
+		delaytime: freq.reciprocal,
+		decaytime: decay,
 		coef:  Lag.kr(In.kr(~wiiXbus), 1).clip(0.1, 0.9);
-klang =	Klang.ar(`[ freq * [1, 2, 3, 5, 7, 11, 16], [0.5, 0.1, 0.1, 0.3, 0.4, 0.1, 0.1]]);
-	klang = klang * env;
-	snd = snd * klang;
-    Out.ar(0, [snd, snd]);
+	);
+		klang =	Klang.ar(`[ freq * [1, 2, 3, 5, 7, 11, 16], [0.5, 0.1, 0.1, 0.3, 0.4, 0.1, 0.1]]);
+		klang = klang * env;
+		snd = snd * klang;
+	Out.ar(0, [snd, snd]);
 }).add;
 
 
